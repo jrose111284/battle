@@ -21,6 +21,8 @@ GEM
       rack (>= 1.0)
     rspec-sinatra (0.1.2)
       templater (>= 1.0.0)
+    shotgun (0.9.1)
+      rack (>= 1.0)
     sinatra (1.4.6)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -39,6 +41,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   rspec-sinatra
+  shotgun
   sinatra
 
 BUNDLED WITH
