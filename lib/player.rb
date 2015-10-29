@@ -6,6 +6,7 @@ class Player
 	def initialize(name)
 		@name = name
     @hp = DEFAULT_HP
+    @awake = true
 	end
 
   def receive_damage(attack_dmg)

@@ -31,6 +31,15 @@ class Game
     switch
   end
 
+  def sleep(player)
+    if @damage.sleep
+      @attack_message = "#{player.name} is sleeping!"
+    else
+      @attack_message = "Unlucky #{player.name} is still awake!"
+       switch
+    end
+  end
+
   def opposite_player
     @players.select { |elem| elem != @current_turn }.first
   end

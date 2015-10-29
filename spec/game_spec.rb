@@ -2,9 +2,9 @@ require 'game'
 
 describe Game do
   subject(:game) { described_class.new(player_1, player_2, damage) }
-  let(:player_1) { double :player_1, receive_damage: nil, lost?: false, name: 'Andy', heal: nil }
-  let(:player_2) { double :player_2, receive_damage: nil, lost?: false, name: 'Rob', heal: nil }
-  let(:damage) { double :damage, random: 20 }
+  let(:player_1) { double :player_1, receive_damage: nil, lost?: false, name: 'Andy', heal: nil}
+  let(:player_2) { double :player_2, receive_damage: nil, lost?: false, name: 'Rob', heal: nil}
+  let(:damage) { double :damage, random: 20, sleep: true }
 
   subject(:losing_game) { described_class.new(player_1, player_lost, damage) }
   let(:player_lost) {double :losing_player, lost?: true }
@@ -56,6 +56,22 @@ describe Game do
 
     it 'should update the #attack_message' do
       expect{ game.heal(player_1) }.to change { game.attack_message }.to "Andy is healed!"
+    end
+  end
+
+    describe '#sleep' do
+    it 'should call the #damage.sleep method' do
+      expect(damage).to receive(:sleep)
+      game.sleep(player_1)
+    end
+
+    it 'should not switch turns when sleeping' do
+      game.sleep(player_2)
+      expect(game.current_turn).to eq(player_1)
+    end
+
+    it 'should update the #attack_message' do
+      expect{ game.sleep(player_1) }.to change { game.attack_message }.to "Andy is sleeping!"
     end
   end
 

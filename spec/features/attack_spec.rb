@@ -12,4 +12,10 @@ feature 'Attacking' do
     click_button('Heal')
     expect(page).to have_content 'Almighty Tom is healed!'
   end
+
+  scenario 'sleep' do
+    sign_in_and_play
+    click_button('Sleep')
+    expect(page).to have_content 'Incredible Yev is sleeping!'
+  end
 end

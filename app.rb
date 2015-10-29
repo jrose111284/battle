@@ -38,6 +38,13 @@ class Battle < Sinatra::Base
     erb(:attack)
   end
 
+  get '/sleep' do
+    @game = $game
+    @game.sleep($game.opposite_player)
+    @message = $game.attack_message
+    erb(:attack)
+  end
+
   get '/game_over' do
     @losing_player = $game.losing_player.name
     @winning_player = $game.winning_player.name
