@@ -5,7 +5,8 @@
   <link href='/css/application.css' rel='stylesheet' type='text'>
 </head>
 <body>
-<header><%= @game.player_1.name %> vs. <%= @game.player_2.name %></header>
+<header><%= @game.player_1.name %> vs. <%= @game.player_2.name %>
+</header>
 <h2><%=@game.player_1.name%>: <%=@game.player_1.hp%>HP</h2>
 <progress id="HP" value=<%=@game.player_1.hp%> max=<%=@game.player_1.class::DEFAULT_HP%>></progress>
 <h2><%=@game.player_2.name%>: <%=@game.player_2.hp%>HP</h2>
