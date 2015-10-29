@@ -31,6 +31,12 @@ describe Player do
       expect(player_1.lost?).to eq false
     end
   end
+
+  describe '#heal' do
+    it 'heals the player' do
+      expect{ player_1.heal(10) }.to change{ player_1.hp }.by 10
+    end
+  end
 end
 
 

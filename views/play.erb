@@ -12,7 +12,11 @@
 <h2><%=@game.player_2.name%>: <%=@game.player_2.hp%>HP</h2>
 <progress id="HP" value=<%=@game.player_2.hp%> max=<%=@game.player_2.class::DEFAULT_HP%>></progress>
 <form action='/attack'>
-  <input type='submit' value='Attack'>
+  <input type='submit' value='Attack' name='Attack'>
 </form>
+<form action='/heal'>
+  <input type='submit' value='Heal' name='Heal'>
+</form>
+
 </body>
 </html>

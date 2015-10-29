@@ -12,6 +12,10 @@ class Player
     @hp -= attack_dmg
   end
 
+  def heal(heal_amount)
+    @hp += heal_amount
+  end
+
   def lost?
     @hp <= 0
   end

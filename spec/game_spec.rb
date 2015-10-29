@@ -2,16 +2,16 @@ require 'game'
 
 describe Game do
   subject(:game) { described_class.new(player_1, player_2, damage) }
-  let(:player_1) { double :player_1, receive_damage: nil, lost?: false }
-  let(:player_2) { double :player_2, receive_damage: nil, lost?: false }
-  let(:damage) { double :damage, attack_damage: 20 }
+  let(:player_1) { double :player_1, receive_damage: nil, lost?: false, name: 'Andy', heal: nil }
+  let(:player_2) { double :player_2, receive_damage: nil, lost?: false, name: 'Rob', heal: nil }
+  let(:damage) { double :damage, random: 20 }
 
   subject(:losing_game) { described_class.new(player_1, player_lost, damage) }
   let(:player_lost) {double :losing_player, lost?: true }
 
 
   describe '#attack' do
-    it 'should reduce the opponent HP by the default amount' do
+    it 'should call the receive damage method' do
       expect(player_1).to receive(:receive_damage)
       game.attack(player_1)
     end
@@ -39,8 +39,23 @@ describe Game do
   describe '#attack' do
     it 'calls receive damage with 1 arg on player' do
 
-      expect(player_2).to receive(:receive_damage).with(damage::attack_damage)
+      expect(player_2).to receive(:receive_damage).with(damage::random)
       game.attack(player_2)
+    end
+  end
+
+  describe '#heal' do
+    it 'should call the Player#heal method' do
+      expect(player_1).to receive(:heal)
+      game.heal(player_1)
+    end
+
+    it 'should switch turns after healing' do
+      expect{ game.heal(player_1) }.to change{ game.current_turn }.to(player_2)
+    end
+
+    it 'should update the #attack_message' do
+      expect{ game.heal(player_1) }.to change { game.attack_message }.to "Andy is healed!"
     end
   end
 
@@ -62,6 +77,16 @@ describe Game do
     end
   end
 
+  describe '@attack_message' do
+    it 'updates the attack message on attack' do
+      game.attack(player_2)
+      expect(game.attack_message).to eq 'Andy attacks Rob!'
+    end
+
+    it 'defaults as an empty message' do
+      expect(game.attack_message).to eq ''
+    end
+  end
 end
 
 

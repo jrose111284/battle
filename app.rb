@@ -22,14 +22,20 @@ class Battle < Sinatra::Base
 
   get '/attack' do
     @game = $game
-    @current_turn = @game.current_turn
-    @opposite_player = @game.opposite_player
-    @game.attack(@opposite_player)
+    @game.attack($game.opposite_player)
+    @message = $game.attack_message
     if @game.game_over?
       redirect '/game_over'
     else
       erb(:attack)
     end
+  end
+
+  get '/heal' do
+    @game = $game
+    @game.heal($game.current_turn)
+    @message = $game.attack_message
+    erb(:attack)
   end
 
   get '/game_over' do

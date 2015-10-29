@@ -2,12 +2,13 @@ require_relative 'damage'
 
 class Game
 
-  attr_reader :current_turn
+  attr_reader :current_turn, :attack_message
 
   def initialize(player_1, player_2, damage_model=Damage)
     @players = [player_1, player_2]
     @current_turn = player_1
     @damage = damage_model
+    @attack_message = ''
   end
 
   def player_1
@@ -19,7 +20,14 @@ class Game
   end
 
   def attack(player)
-    player.receive_damage(@damage.attack_damage)
+    player.receive_damage(@damage.random)
+    @attack_message = "#{@current_turn.name} attacks #{player.name}!"
+    switch
+  end
+
+  def heal(player)
+    player.heal(@damage.random)
+    @attack_message = "#{player.name} is healed!"
     switch
   end
 
