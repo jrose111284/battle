@@ -1,8 +1,20 @@
-<h1><%= @game.player_1.name %> vs. <%= @game.player_2.name %></h1>
-<div><%=@game.player_2.name%>: <%=@game.player_2.hp%>HP</div>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Playerscreen</title>
+  <link href='/css/application.css' rel='stylesheet' type='text'>
+</head>
+<body>
+
+  <header><%= @game.player_1.name %> vs. <%= @game.player_2.name %></header>
+<h2><%=@game.player_2.name%>: <%=@game.player_2.hp%>HP</h2>
 <progress id="HP" value=<%=@game.player_2.hp%> max=<%=@game.player_2.class::DEFAULT_HP%>></progress>
-<div><%=@game.player_1.name%>: <%=@game.player_1.hp%>HP</div>
+<h2><%=@game.player_1.name%>: <%=@game.player_1.hp%>HP</h2>
 <progress id="HP" value=<%=@game.player_1.hp%> max=<%=@game.player_1.class::DEFAULT_HP%>></progress>
 <form action='/attack'>
   <input type='submit' value='Attack'>
+
+
 </form>
+</body>
+</html>
