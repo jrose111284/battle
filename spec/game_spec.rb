@@ -5,7 +5,7 @@ describe Game do
   let(:player_1) { double :player_1, receive_damage: nil }
   let(:player_2) { double :player_2, receive_damage: nil }
 
-  
+
   describe '#attack' do
     it 'should reduce the opponent HP by the default amount' do
       expect(player_1).to receive(:receive_damage)
@@ -29,6 +29,13 @@ describe Game do
   describe '#opposite_player' do
     it 'has an opposite player as player 2' do
       expect(game.opposite_player).to eq player_2
+    end
+  end
+
+  describe '#attack' do
+    it 'calls receive damage with 1 arg on player' do
+      expect(player_2).to receive(:receive_damage).with(described_class::DEFAULT_ATTACK)
+      game.attack(player_2)
     end
   end
 end

@@ -1,5 +1,7 @@
 class Game
 
+  DEFAULT_ATTACK = 10
+
   attr_reader :current_turn
 
   def initialize(player_1, player_2)
@@ -16,7 +18,7 @@ class Game
   end
 
   def attack(player)
-    player.receive_damage
+    player.receive_damage(DEFAULT_ATTACK)
     switch
   end
 
