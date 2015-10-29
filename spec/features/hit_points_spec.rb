@@ -8,6 +8,7 @@ feature 'Hit points' do
   end
 
   scenario 'reduces both players hit points after being attacked' do
+    allow(Damage).to receive(:attack_damage).and_return(10)
     sign_in_and_play
     attack_round
     expect(page).to have_content 'Incredible Yev: 90HP'

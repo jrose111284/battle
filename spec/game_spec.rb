@@ -1,11 +1,12 @@
 require 'game'
 
 describe Game do
-  subject(:game) { described_class.new(player_1, player_2) }
+  subject(:game) { described_class.new(player_1, player_2, damage) }
   let(:player_1) { double :player_1, receive_damage: nil, lost?: false }
   let(:player_2) { double :player_2, receive_damage: nil, lost?: false }
+  let(:damage) { double :damage, attack_damage: 20 }
 
-  subject(:losing_game) { described_class.new(player_1, player_lost) }
+  subject(:losing_game) { described_class.new(player_1, player_lost, damage) }
   let(:player_lost) {double :losing_player, lost?: true }
 
 
@@ -37,7 +38,8 @@ describe Game do
 
   describe '#attack' do
     it 'calls receive damage with 1 arg on player' do
-      expect(player_2).to receive(:receive_damage).with(described_class::DEFAULT_ATTACK)
+
+      expect(player_2).to receive(:receive_damage).with(damage::attack_damage)
       game.attack(player_2)
     end
   end
@@ -59,6 +61,7 @@ describe Game do
       expect(losing_game.game_over?).to eq true
     end
   end
+
 end
 
 

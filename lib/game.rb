@@ -1,12 +1,13 @@
-class Game
+require_relative 'damage'
 
-  DEFAULT_ATTACK = 10
+class Game
 
   attr_reader :current_turn
 
-  def initialize(player_1, player_2)
+  def initialize(player_1, player_2, damage_model=Damage)
     @players = [player_1, player_2]
     @current_turn = player_1
+    @damage = damage_model
   end
 
   def player_1
@@ -18,7 +19,7 @@ class Game
   end
 
   def attack(player)
-    player.receive_damage(DEFAULT_ATTACK)
+    player.receive_damage(@damage.attack_damage)
     switch
   end
 
