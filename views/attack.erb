@@ -1,4 +1,13 @@
-<h1><%=@current_turn.name%> attacks <%=@opposite_player.name%>!</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Attack!</title>
+  <link href='/css/application.css' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<header><%=@current_turn.name%> attacks <%=@opposite_player.name%>!</header>
 <form action='/play'>
   <input type='submit' value='OK'>
 </form>
+</body>
+</html>
