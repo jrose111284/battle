@@ -1,6 +1,6 @@
 class Game
 
-  DEFAULT_ATTACK = 10
+  DEFAULT_ATTACK = 50
 
   attr_reader :current_turn
 
@@ -24,6 +24,18 @@ class Game
 
   def opposite_player
     @players.select { |elem| elem != @current_turn }.first
+  end
+
+  def losing_player
+    @players.select { |elem| elem.lost? }.first
+  end
+
+  def winning_player
+    @players.select { |elem| elem.lost? == false }.first
+  end
+
+  def game_over?
+    !losing_player.nil?
   end
 
   private

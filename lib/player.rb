@@ -12,4 +12,7 @@ class Player
     @hp -= attack_dmg
   end
 
+  def lost?
+    @hp <= 0
+  end
 end

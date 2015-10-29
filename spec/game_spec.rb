@@ -2,8 +2,11 @@ require 'game'
 
 describe Game do
   subject(:game) { described_class.new(player_1, player_2) }
-  let(:player_1) { double :player_1, receive_damage: nil }
-  let(:player_2) { double :player_2, receive_damage: nil }
+  let(:player_1) { double :player_1, receive_damage: nil, lost?: false }
+  let(:player_2) { double :player_2, receive_damage: nil, lost?: false }
+
+  subject(:losing_game) { described_class.new(player_1, player_lost) }
+  let(:player_lost) {double :losing_player, lost?: true }
 
 
   describe '#attack' do
@@ -38,4 +41,30 @@ describe Game do
       game.attack(player_2)
     end
   end
+
+  describe '#losing_player' do
+    it 'identifies a losing player' do
+      expect(losing_game.losing_player).to eq player_lost
+    end
+  end
+
+  describe '#winning_player' do
+    it 'identifies a winning player' do
+      expect(losing_game.winning_player).to eq player_1
+    end
+  end
+
+  describe '#game_over?' do
+    it 'identifies that it is game over when there is a losing player' do
+      expect(losing_game.game_over?).to eq true
+    end
+  end
 end
+
+
+
+
+
+
+
+
