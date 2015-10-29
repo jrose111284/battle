@@ -1,6 +1,6 @@
 class Game
 
-  DEFAULT_ATTACK = 50
+  DEFAULT_ATTACK = 10
 
   attr_reader :current_turn
 
