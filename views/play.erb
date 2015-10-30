@@ -5,17 +5,28 @@
   <link href='/css/application.css' rel='stylesheet' type='text'>
 </head>
 <body>
-<header><%= @game.player_1.name %> vs. <%= @game.player_2.name %>
+<header><%=@game.player_1.name%> vs. <%=@game.player_2.name%>
 </header>
+<div class='player1'>
+<img src='/images/ash.png'>
 <h2><%=@game.player_1.name%>: <%=@game.player_1.hp%>HP</h2>
 <progress id="HP" value=<%=@game.player_1.hp%> max=<%=@game.player_1.class::DEFAULT_HP%>></progress>
+</div>
+
+<div class='player2'>
+<img src='/images/pikachu.png'>
 <h2><%=@game.player_2.name%>: <%=@game.player_2.hp%>HP</h2>
 <progress id="HP" value=<%=@game.player_2.hp%> max=<%=@game.player_2.class::DEFAULT_HP%>></progress>
+</div>
+</body>
+
 <form action='/attack' method='post'>
-  <input type='submit' value='Attack' name='atk_choice'>
-  <input type='submit' value='Heal' name='atk_choice'>
-  <input type='submit' value='Sleep' name='atk_choice'>
+  <input type='submit' value='Attack' name='atk_choice' class='form_buttons'>
+  <input type='submit' value='Heal' name='atk_choice' class='form_buttons'>
+  <input type='submit' value='Sleep' name='atk_choice' class='form_buttons'>
 </form>
 
-</body>
+<audio autoplay>
+  <source src="/audio/theme.mp3" type="audio/mpeg">
+</audio>
 </html>
