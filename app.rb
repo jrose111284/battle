@@ -20,7 +20,7 @@ class Battle < Sinatra::Base
     erb(:play)
   end
 
-  get '/attack' do
+  post '/attack' do
     @game = $game
     case params[:atk_choice]
     when 'Attack' then @game.attack($game.opposite_player)
