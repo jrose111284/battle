@@ -15,6 +15,7 @@ feature 'Attacking' do
 
   scenario 'sleep' do
     sign_in_and_play
+    allow(Damage).to receive(:sleep).and_return(true)
     click_button('Sleep')
     expect(page).to have_content 'Incredible Yev is sleeping!'
   end

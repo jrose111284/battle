@@ -22,27 +22,17 @@ class Battle < Sinatra::Base
 
   get '/attack' do
     @game = $game
-    @game.attack($game.opposite_player)
+    case params[:atk_choice]
+    when 'Attack' then @game.attack($game.opposite_player)
+    when 'Heal' then @game.heal($game.current_turn)
+    when 'Sleep' then $game.sleep($game.opposite_player)
+    end
     @message = $game.attack_message
     if @game.game_over?
       redirect '/game_over'
     else
       erb(:attack)
     end
-  end
-
-  get '/heal' do
-    @game = $game
-    @game.heal($game.current_turn)
-    @message = $game.attack_message
-    erb(:attack)
-  end
-
-  get '/sleep' do
-    @game = $game
-    @game.sleep($game.opposite_player)
-    @message = $game.attack_message
-    erb(:attack)
   end
 
   get '/game_over' do
